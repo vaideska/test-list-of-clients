@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.css";
 import logo from "../../logo.png";
 import Clock from "../Clock/Clock";
-import Dropdown from "../Dropdown/Dropdown";
+import Dropdown from "../LandDropdown/LangDropdown";
 
 export default class Header extends React.Component {
   render() {
@@ -11,7 +11,7 @@ export default class Header extends React.Component {
       <img className={styles.logo} src={logo} alt="logo" />
       <div className={styles.info}>
         <div className={styles.menu}>
-          <Dropdown list={['ru', 'en']} />
+          <Dropdown />
         </div>
         <div className={styles.clock}>
           <Clock />

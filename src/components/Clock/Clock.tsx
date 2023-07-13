@@ -2,6 +2,7 @@ import React from "react";
 
 interface DefaultProps {}
 interface Props extends DefaultProps {}
+
 type clockState = {
   date: Date
 }
