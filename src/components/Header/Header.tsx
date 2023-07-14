@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.css";
 import logo from "../../logo.png";
 import Clock from "../Clock/Clock";
-import Dropdown from "../LandDropdown/LangDropdown";
+import Dropdown from "../LangDropdown/LangDropdown";
 
 export default class Header extends React.Component {
   render() {
