@@ -6,13 +6,24 @@ import { ThunkDispatch } from "redux-thunk";
 import data from "../../data.json";
 import { LangContext, LanguagesType } from "../../lang/LangContext";
 
+const limit = 10;
+
 type DispatchProps = {
   fetch: () => void
 }
 
+type StateProps = {
+  page: number;
+}
+
 type Props = ClientState & DispatchProps;
 
-class ClientList extends React.Component<Props> {
+class ClientList extends React.Component<Props, StateProps> {
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { page: 1 };
+  }
 
   componentDidMount() {
     this.props.fetch();
@@ -23,11 +34,13 @@ class ClientList extends React.Component<Props> {
     lang: LanguagesType;
     };
 
+  setTodoPage(page: number) {
+    this.setState({ page });
+  }
+
   
   render() {
     const {clients, error, loading} = this.props;
-    const renderClients = clients.filter(client => client.lang === this.context.lang);
-
     if (loading) {
       return <div className={styles.list}>Идет загрузка</div>
     }
@@ -35,11 +48,33 @@ class ClientList extends React.Component<Props> {
     if (error) {
       return <div className={styles.list}>{error}</div>
     }
+
+
+    const clientsWithLang = clients.filter(
+      client => client.lang === this.context.lang
+      );
+
+    const pages = [...Array(Math.ceil(clientsWithLang.length / limit))].map((v, index) => index + 1);
+    
+    const renderClients = clientsWithLang.filter(
+      (value, index) => index <= this.state.page * limit && index >= (this.state.page-1) * limit);
   
     return (
-      <div className={styles.list}>
-        {renderClients.map(client =>
-          <div key={client.id + this.context.lang}>{client.name}</div>)}
+      <div>
+        <div className={styles.list}>
+          {renderClients.map(client =>
+            <div key={client.id + this.context.lang}>{client.name}</div>)}
+        </div>
+        <div style={{display: 'flex'}}>
+          {pages.map(p => 
+            <div
+            onClick={() => this.setTodoPage(p)}
+            style={{border:p === this.state.page ? '2px solid green' : '1px solid grey', padding: 10}}
+            >
+              {p}
+            </div>
+            )}
+        </div>
       </div>
     )
   }
