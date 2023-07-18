@@ -1,3 +1,8 @@
 .list {
-  padding-top: 70px;
+  padding: 70px 0;
+}
+
+.clientItem {
+  border: 1px solid grey;
+  padding: 10px;
 }

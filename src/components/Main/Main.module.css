@@ -1,0 +1,24 @@
+.list {
+  padding: 70px 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.activePage {
+  border: 2px solid green;
+}
+
+.clientItem {
+  border: 1px solid grey;
+  padding: 10px;
+}
